@@ -1,0 +1,16 @@
+{
+  "name": "graph-sm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Olanrewaju A. Olaboye",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^3.10.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "joi": "^17.6.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.4"
+  }
+}
