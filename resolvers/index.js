@@ -5,7 +5,7 @@ const { UserInputError } = require('apollo-server');
 const resolvers = {
   Query: {
     async user(root, { id }, { models }) {
-      return models.User.findById(id);
+      return models.User.findById(id).populate('tasks');
     },
     async getUsers(root, args, { models }) {
       return models.User.find();
