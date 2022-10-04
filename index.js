@@ -14,8 +14,6 @@ const server = new ApolloServer({
 
 mongoose
   .connect(process.env.DATABASE_URL)
-  .then(() => 'connected to db')
+  .then(() => console.log('connected to db'))
   .then(() => server.listen(4000))
-  .then((serverListeningResponse) =>
-    console.log('server listens', serverListeningResponse)
-  );
+  .then(() => console.log('server listens on 4000'));

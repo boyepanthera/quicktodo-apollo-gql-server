@@ -1,7 +1,7 @@
-const Note = require('./Note.model');
+const Task = require('./Task.model');
 const User = require('./User.model');
 
 module.exports = {
-  Note,
+  Task,
   User,
 };

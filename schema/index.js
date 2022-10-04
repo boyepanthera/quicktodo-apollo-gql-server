@@ -7,7 +7,7 @@ const typeDefs = gql`
     lastName: String
     password: String
     email: String
-    notes: [Note]
+    tasks: [Task]
   }
 
   type LoginUser {
@@ -15,7 +15,7 @@ const typeDefs = gql`
     id: String!
   }
 
-  type Note {
+  type Task {
     id: String!
     title: String
     userId: String!
