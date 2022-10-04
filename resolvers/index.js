@@ -7,9 +7,19 @@ const resolvers = {
     async user(root, { id }, { models }) {
       return models.User.findById(id);
     },
+    async getUsers(root, args, { models }) {
+      return models.User.find();
+    },
+    async task(root, { id }, { models: { Task } }) {
+      return Task.findById(id);
+    },
+    async getTasks(root, args, { models: { Task } }) {
+      return Task.find();
+    },
   },
 
   Mutation: {
+    // Auth Mutations
     async registerUser(
       root,
       { firstName, lastName, email, password },
@@ -50,6 +60,15 @@ const resolvers = {
         id: user.id,
         token,
       };
+    },
+
+    // Task Mutations
+    async createTask(root, { userId, title }, { models: { Task, User } }) {
+      const owner = await User.findById(userId);
+      const task = await Task.create({ userId, title });
+      owner.tasks.push(task._id);
+      await owner.save();
+      return task;
     },
   },
 };

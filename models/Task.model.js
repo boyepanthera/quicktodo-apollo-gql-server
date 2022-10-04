@@ -6,7 +6,7 @@ const taskSchema = new Schema({
   userId: { type: String, ref: 'Note' },
   completed: {
     type: Boolean,
-    defautl: false,
+    default: false,
   },
 });
 

@@ -6,10 +6,10 @@ const userSchema = new Schema({
   lastName: String,
   password: String,
   email: String,
-  notes: [
+  tasks: [
     {
       type: String,
-      ref: 'Note',
+      ref: 'Task',
     },
   ],
 });

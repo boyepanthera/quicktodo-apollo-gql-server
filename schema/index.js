@@ -23,7 +23,10 @@ const typeDefs = gql`
   }
 
   type Query {
+    task(id: String!): Task!
+    getTasks: [Task!]!
     user(id: String!): User!
+    getUsers: [User!]!
   }
 
   type Mutation {
@@ -35,6 +38,7 @@ const typeDefs = gql`
     ): User!
 
     loginUser(email: String!, password: String!): LoginUser
+    createTask(userId: String!, title: String!): Task!
   }
 `;
 
