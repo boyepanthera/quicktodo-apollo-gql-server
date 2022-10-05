@@ -5,7 +5,7 @@ const { UserInputError } = require('apollo-server');
 const resolvers = {
   Query: {
     async user(root, { id }, { models }) {
-      return models.User.findById(id).populate('tasks');
+      return models.User.findById(id);
     },
     async getUsers(root, args, { models }) {
       return models.User.find();
@@ -37,7 +37,7 @@ const resolvers = {
       });
       return user;
     },
-    async loginUser(root, { email, password }, { models }) {
+    async loginUser(root, { LoginInput: { email, password } }, { models }) {
       const user = await models.User.findOne({
         email,
       });
@@ -69,6 +69,38 @@ const resolvers = {
       owner.tasks.push(task._id);
       await owner.save();
       return task;
+    },
+
+    async updateTask(root, { id, completed, title }, { models: { Task } }) {
+      const task = await Task.findByIdAndUpdate(
+        id,
+        { completed, title },
+        { returnDocument: 'after' }
+      );
+      return task;
+    },
+
+    async deleteTask(root, { taskId }, { models: { Task, User } }) {
+      const task = await Task.findByIdAndDelete(taskId);
+      if (!task) {
+        throw new UserInputError('task does not exist');
+      }
+      const owner = await User.findById(task.userId);
+      owner.tasks.filter((id) => id !== task._id);
+      await owner.save();
+      return task;
+    },
+  },
+
+  User: {
+    tasks: async (user) => {
+      const tasks = (await user.populate('tasks')).tasks;
+      return tasks;
+    },
+  },
+  Task: {
+    async userId(task) {
+      return (await task.populate('userId')).userId;
     },
   },
 };

@@ -7,7 +7,7 @@ const typeDefs = gql`
     lastName: String
     password: String
     email: String
-    tasks: [Task]
+    tasks: [Task!]
   }
 
   type LoginUser {
@@ -18,8 +18,19 @@ const typeDefs = gql`
   type Task {
     id: String!
     title: String
-    userId: String!
+    userId: User
     completed: Boolean
+  }
+
+  input LoginInput {
+    email: String!
+    password: String!
+  }
+
+  input UpdateTaskInput {
+    id: String
+    completed: Boolean
+    title: String
   }
 
   type Query {
@@ -36,9 +47,10 @@ const typeDefs = gql`
       email: String!
       password: String!
     ): User!
-
-    loginUser(email: String!, password: String!): LoginUser
+    loginUser(LoginInput: LoginInput!): LoginUser
     createTask(userId: String!, title: String!): Task!
+    updateTask(UpdateTaskInput: UpdateTaskInput): Task!
+    deleteTask(taskId: String!): Task!
   }
 `;
 

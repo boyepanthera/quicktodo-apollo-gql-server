@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const taskSchema = new Schema({
   title: String,
-  userId: { type: String, ref: 'Note' },
+  userId: { type: String, ref: 'User' },
   completed: {
     type: Boolean,
     default: false,
