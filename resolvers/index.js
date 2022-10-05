@@ -71,12 +71,19 @@ const resolvers = {
       return task;
     },
 
-    async updateTask(root, { id, completed, title }, { models: { Task } }) {
+    async updateTask(
+      root,
+      { UpdateTaskInput: { id, completed, title } },
+      { models: { Task } }
+    ) {
       const task = await Task.findByIdAndUpdate(
         id,
         { completed, title },
         { returnDocument: 'after' }
       );
+      if (!task) {
+        throw new UserInputError('task not found');
+      }
       return task;
     },
 
