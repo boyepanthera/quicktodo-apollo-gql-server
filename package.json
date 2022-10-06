@@ -5,7 +5,7 @@
   "author": "Olanrewaju A. Olaboye",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "dev": "nodemon index.js"
   },
   "dependencies": {
@@ -16,7 +16,8 @@
     "graphql": "^16.6.0",
     "joi": "^17.6.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.6.4"
+    "mongoose": "^6.6.4",
+    "pm2": "^5.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
