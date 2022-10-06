@@ -12,8 +12,10 @@ const server = new ApolloServer({
   context: { models },
 });
 
+const port = process.env.PORT || 4000;
+
 mongoose
   .connect(process.env.DATABASE_URL)
   .then(() => console.log('connected to db'))
-  .then(() => server.listen(4000))
-  .then(() => console.log('server listens on 4000'));
+  .then(() => server.listen(port))
+  .then(() => console.log('server listens on ' + port));
