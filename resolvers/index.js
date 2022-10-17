@@ -13,7 +13,8 @@ const resolvers = {
     async task(root, { id }, { models: { Task } }) {
       return Task.findById(id);
     },
-    async getTasks(root, args, { models: { Task } }) {
+    async getTasks(root, { userId }, { models: { Task } }) {
+      if (userId) return Task.find({ userId });
       return Task.find();
     },
   },
